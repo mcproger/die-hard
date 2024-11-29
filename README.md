@@ -40,3 +40,12 @@ make install
 ## Linter
 
 `make lint`
+
+## Approach
+
+- use VersionedCollapsingMergeTree instead MergeTree for the purpose 
+effective remove data from ClickHouse on database error
+- add table ClickHouseSyncLogs to save synchronized logs
+- use Celery to realize periodical task for purpose run background tasks 
+(Celery used threads worker, because it's IO bound task)
+- add support force synchronized logs to make it immediately if you need

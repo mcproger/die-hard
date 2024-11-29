@@ -78,6 +78,14 @@ CLICKHOUSE_URI = (
 )
 CLICKHOUSE_EVENT_LOG_TABLE_NAME = 'event_log'
 
+CLICKHOUSE_IMPORT_CHUNK_SIZE = int(env('CLICKHOUSE_IMPORT_CHUNK_SIZE', default=100))
+CLICKHOUSE_IMPORT_MAX_RETRIES = int(env('CLICKHOUSE_IMPORT_MAX_RETRIES', default=2))
+CLICKHOUSE_IMPORT_MAX_CHUNKS_SEND = int(env('CLICKHOUSE_IMPORT_MAX_CHUNKS_SEND', default=20))
+CLICKHOUSE_IMPORT_NOT_SYNCED_LOGS_COUNT = env(
+    'CLICKHOUSE_IMPORT_NOT_SYNCED_LOGS_COUNT',
+    default='not_synced_logs_count_redis')
+
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -110,8 +118,13 @@ STATIC_ROOT = env("STATIC_ROOT")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_BROKER = env("CELERY_BROKER", default="redis://localhost:6379/0")
-CELERY_ALWAYS_EAGER = env("CELERY_ALWAYS_EAGER", default=DEBUG)
+CELERY_BROKER_URL = env("CELERY_BROKER", default="redis://redis:6379/0")
+CELERY_TASK_ALWAYS_EAGER = env("CELERY_TASK_ALWAYS_EAGER", default=DEBUG)
+CELERY_DEFAULT_RETRY_DELAY = int(env('CELERY_DEFAULT_RETRY_DELAY', default=60))
+
+REDIS_HOST = env('REDIS_HOST', default='redis')
+REDIS_PORT = int(env('REDIS_HOST', default=6379))
+REDIS_DB = int(env('REDIS_DB', default=0))
 
 LOG_FORMATTER = env("LOG_FORMATTER", default="console")
 LOG_LEVEL = env("LOG_LEVEL", default="INFO")

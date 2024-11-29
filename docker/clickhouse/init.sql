@@ -5,8 +5,9 @@ CREATE TABLE IF NOT EXISTS event_log
     `environment` String,
     `event_context` String,
     `metadata_version` Int32 DEFAULT 1,
+    `sign` Int8,
 )
-ENGINE = MergeTree()
+ENGINE = VersionedCollapsingMergeTree(sign, event_date_time)
 PARTITION BY toYYYYMM(event_date_time)
 ORDER BY (event_date_time, event_type)
 SETTINGS index_granularity = 8192

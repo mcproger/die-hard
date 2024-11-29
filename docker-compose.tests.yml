@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    restart: !reset 'no'
+    env_file:
+      - ./src/core/.env.ci
+    extends:
+      file: ./docker-compose.yml
+      service: app
+    command: ["../docker/wait-for-it.sh", "db:5432", "clickhouse:8123", "--", "pytest", "-svv"]
+    ports: !reset []
+  db:
+    env_file:
+      - ./src/core/.env.ci
+    extends:
+      file: ./docker-compose.yml
+      service: db
+    ports: !reset []
+
+  redis:
+    env_file:
+      - ./src/core/.env.ci
+    extends:
+      file: ./docker-compose.yml
+      service: redis
+    ports: !reset []
+
+  clickhouse:
+    env_file:
+      - ./src/core/.env.ci
+    extends:
+      file: ./docker-compose.yml
+      service: clickhouse
+    ports: !reset []
+
+
+volumes:
+  dev-db-data: {}
+  app_media_files: { }
+  app_static_files: { }

@@ -9,3 +9,5 @@ pytest-django==4.9.0
 psycopg2==2.9.10
 ruff==0.7.1
 clickhouse-connect==0.8.5
+redis
+faker

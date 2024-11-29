@@ -23,3 +23,17 @@ class User(TimeStampedModel, AbstractBaseUser):
             return f'{self.first_name} {self.last_name}'
 
         return self.email
+
+
+class ClickHouseSyncLogs(TimeStampedModel):
+    """ClickHouse synchronized logs."""
+
+    user = models.OneToOneField(
+        'User',
+        on_delete=models.CASCADE,
+        null=False,
+        related_name='clickhouse_sync')
+
+    class Meta:
+        verbose_name = 'clickhouse_sync_log'
+        verbose_name_plural = 'clickhouse_sync_logs'
