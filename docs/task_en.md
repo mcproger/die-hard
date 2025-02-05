@@ -7,7 +7,7 @@ You will be given a short description of a problem along with several basic rest
 As we expect the candidate to be able to work (or quickly adapt to) our tech stack,
 you will also be given a list of recommended technologies.
 
-You are expected to send a pull request in a public fork on Github or an archive with code to 
+You are expected to send a pull request in a *private* Github/Gitlab repo or an archive with code to 
 [mcproger7@gmail.com](mailto:mcproger7@gmail.com) with a clear subject and author name so that we can provide feedback.
 
 The repository must contain:
